@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         customers.push({
           name: cname,
           pin: cpin,
+          initialBalance: camount,
           balance: camount,
           transactions: [],
         });
@@ -52,12 +53,14 @@ function renderCustomers() {
   actionContainer.innerHTML = "";
 
   customers.forEach((cust, index) => {
+    const isElite = cust.name.toLowerCase() === "customer 1";
+
     const detailCard = document.createElement("div");
     detailCard.className = "customer-card";
     detailCard.innerHTML = `
-      <h5>${cust.name}</h5>
+      <h5>${cust.name}${isElite ? " (Elite)" : ""}</h5>
       <p>PIN: ${cust.pin}</p>
-      <p>Initial Balance: ₹${cust.balance}</p>
+      <p>Initial Balance: ₹${cust.initialBalance}</p>
     `;
     detailContainer.appendChild(detailCard);
 
@@ -79,17 +82,23 @@ function renderCustomers() {
 function withdrawAmount(index) {
   const input = document.getElementById(`withdraw-${index}`);
   const amount = parseFloat(input.value);
-  if (!isNaN(amount) && amount > 0 && amount <= customers[index].balance) {
-    customers[index].balance -= amount;
-    customers[index].transactions.push({
-      type: "Withdraw",
-      amount,
-      date: new Date().toLocaleString(),
-    });
-    saveCustomers();
-    renderCustomers();
+  const isElite = customers[index].name.toLowerCase() === "customer 1";
+
+  if (!isNaN(amount) && amount > 0) {
+    if (isElite || amount <= customers[index].balance) {
+      customers[index].balance -= amount;
+      customers[index].transactions.push({
+        type: "Withdraw",
+        amount,
+        date: new Date().toLocaleString(),
+      });
+      saveCustomers();
+      renderCustomers();
+    } else {
+      alert("Insufficient balance!");
+    }
   } else {
-    alert("Invalid or insufficient amount");
+    alert("Enter a valid amount.");
   }
 }
 
