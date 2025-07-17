@@ -1,5 +1,18 @@
 let customers = JSON.parse(localStorage.getItem("customers")) || [];
 
+// Ensure initialBalance is set for all customers
+customers = customers.map((cust, index) => {
+  if (cust.initialBalance === undefined) {
+    cust.initialBalance = cust.balance;
+  }
+  if (index === 0) {
+    // Make first customer elite
+    cust.elite = true;
+  }
+  return cust;
+});
+saveCustomers();
+
 function saveCustomers() {
   localStorage.setItem("customers", JSON.stringify(customers));
 }
@@ -18,13 +31,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const camount = parseFloat(amount.value.trim());
 
       if (cname && cpin.length === 4 && !isNaN(camount) && camount > 0) {
-        customers.push({
+        const newCustomer = {
           name: cname,
           pin: cpin,
-          initialBalance: camount,
           balance: camount,
+          initialBalance: camount,
+          elite: customers.length === 0, // first customer is elite
           transactions: [],
-        });
+        };
+
+        customers.push(newCustomer);
         saveCustomers();
 
         outbox.className = "alert alert-success mt-3";
@@ -53,12 +69,12 @@ function renderCustomers() {
   actionContainer.innerHTML = "";
 
   customers.forEach((cust, index) => {
-    const isElite = cust.name.toLowerCase() === "customer 1";
-
     const detailCard = document.createElement("div");
     detailCard.className = "customer-card";
     detailCard.innerHTML = `
-      <h5>${cust.name}${isElite ? " (Elite)" : ""}</h5>
+      <h5>${cust.name}${
+      cust.elite ? ' <span class="badge bg-warning text-dark">Elite</span>' : ""
+    }</h5>
       <p>PIN: ${cust.pin}</p>
       <p>Initial Balance: ₹${cust.initialBalance}</p>
     `;
@@ -82,12 +98,12 @@ function renderCustomers() {
 function withdrawAmount(index) {
   const input = document.getElementById(`withdraw-${index}`);
   const amount = parseFloat(input.value);
-  const isElite = customers[index].name.toLowerCase() === "customer 1";
+  const customer = customers[index];
 
   if (!isNaN(amount) && amount > 0) {
-    if (isElite || amount <= customers[index].balance) {
-      customers[index].balance -= amount;
-      customers[index].transactions.push({
+    if (customer.balance >= amount || customer.elite) {
+      customer.balance -= amount;
+      customer.transactions.push({
         type: "Withdraw",
         amount,
         date: new Date().toLocaleString(),
@@ -95,10 +111,10 @@ function withdrawAmount(index) {
       saveCustomers();
       renderCustomers();
     } else {
-      alert("Insufficient balance!");
+      alert("Insufficient balance (Non-elite customer)");
     }
   } else {
-    alert("Enter a valid amount.");
+    alert("Enter a valid amount");
   }
 }
 
