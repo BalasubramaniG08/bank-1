@@ -1,0 +1,170 @@
+body {
+  background: linear-gradient(to right, #f8f9fa, #ffffff);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-card {
+  background-color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-top: 5px solid #0d6efd;
+}
+
+.login-heading {
+  font-size: 26px;
+  font-weight: 700;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.blue-line {
+  height: 2px;
+  background-color: #0d6efd;
+  width: 80%;
+  margin: 0 auto 20px auto;
+  border-radius: 10px;
+}
+
+.btn {
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border: none;
+}
+
+.btn-success {
+  background-color: #198754;
+  border: none;
+}
+
+.btn-outline-dark {
+  border-radius: 8px;
+  padding: 10px 20px;
+}
+
+.btn:hover {
+  transform: scale(1.03);
+}
+
+input.form-control {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  padding: 10px;
+}
+
+.container {
+  padding: 20px;
+}
+
+.customer-details,
+.customer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.customer-card,
+.action-card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  width: 300px;
+  box-sizing: border-box;
+}
+
+h2{
+    color: black;
+}
+
+.customer-card h5,
+.action-card h5 {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.balance-text {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #198754;
+}
+
+input.withdraw-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.action-buttons button {
+  flex: 1;
+}
+
+.bck {
+  padding: 10px 30px;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  border: 2px solid #0d6efd;
+  color: #0d6efd;
+  transition: all 0.3s ease;
+}
+
+.bck:hover {
+  background-color: #0d6efd;
+  color: white;
+  transform: scale(1.05);
+}
+
+.back-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+.back-btn {
+  padding: 10px 30px;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: #0d6efd; /* same as .btn-primary */
+  border: none;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #0b5ed7; /* hover effect like .btn-primary:hover */
+  transform: scale(1.05);
+}

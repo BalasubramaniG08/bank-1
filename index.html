@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure Bank Login</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <h2 class="login-heading text-dark mb-2">🏦 Secure Bank Login</h2>
+      <div class="blue-line mb-4"></div>
+
+      <div class="mb-3">
+        <label for="name" class="form-label">Customer Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your name" />
+      </div>
+      <div class="mb-3">
+        <label for="pin" class="form-label">4-Digit PIN</label>
+        <input type="password" class="form-control" id="pin" placeholder="Enter your PIN" maxlength="4"/>
+      </div>
+      <div class="mb-3">
+        <label for="amount" class="form-label">Initial Amount</label>
+        <input type="number" class="form-control" id="amount" placeholder="Enter initial deposit" />
+      </div>
+
+      <div class="d-grid gap-2">
+        <button id="submitBtn" class="btn btn-primary">Submit</button>
+        <button id="nextBtn" class="btn btn-success" onclick="window.open('customer.html', '_blank')">Next ➡️</button>
+      </div>
+
+      <div id="outbox" class="alert mt-3 d-none"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
